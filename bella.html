@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para a Belinha 💜</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: "Segoe UI", sans-serif;
+
+            background:
+                radial-gradient(circle at top, #4b267a, transparent 40%),
+                linear-gradient(135deg, #08051a, #101c42, #160b2e);
+
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Pequenas estrelas do fundo */
+
+        .estrela {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: brilho 2s infinite alternate;
+        }
+
+        @keyframes brilho {
+            from {
+                opacity: 0.2;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 650px;
+
+            padding: 40px 25px;
+
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 25px;
+
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 0 40px rgba(106, 70, 170, 0.3);
+
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+
+            background: linear-gradient(90deg, #d8b4fe, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mensagem {
+            font-size: 19px;
+            line-height: 1.6;
+            min-height: 90px;
+
+            color: #e9e4ff;
+
+            margin-bottom: 25px;
+
+            transition: opacity 0.3s;
+        }
+
+        button {
+            border: none;
+            padding: 14px 28px;
+
+            border-radius: 30px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            color: white;
+
+            background: linear-gradient(90deg, #713f9e, #31528f);
+
+            cursor: pointer;
+
+            box-shadow: 0 0 20px rgba(124, 91, 190, 0.4);
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+
+            box-shadow:
+                0 0 30px rgba(163, 124, 255, 0.7);
+        }
+
+        .coracao {
+            position: absolute;
+
+            font-size: 22px;
+
+            pointer-events: none;
+
+            animation: subir 2s ease-out forwards;
+        }
+
+        @keyframes subir {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-150px) scale(1.8);
+            }
+        }
+
+        .assinatura {
+            margin-top: 25px;
+
+            font-size: 15px;
+
+            color: #bdb5df;
+
+            opacity: 0;
+            transition: 1s;
+        }
+
+        .mostrar {
+            opacity: 1;
+        }
+
+        .contador {
+            margin-top: 10px;
+
+            font-size: 13px;
+
+            color: #aaa4c7;
+        }
+
+        @media (max-width: 600px) {
+
+            h1 {
+                font-size: 35px;
+            }
+
+            .mensagem {
+                font-size: 17px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Estrelas -->
+
+    <div class="estrela" style="top:10%; left:15%;"></div>
+    <div class="estrela" style="top:20%; left:80%;"></div>
+    <div class="estrela" style="top:70%; left:10%;"></div>
+    <div class="estrela" style="top:80%; left:85%;"></div>
+    <div class="estrela" style="top:40%; left:5%;"></div>
+    <div class="estrela" style="top:15%; left:50%;"></div>
+    <div class="estrela" style="top:85%; left:45%;"></div>
+    <div class="estrela" style="top:55%; left:90%;"></div>
+
+
+    <main class="container">
+
+        <h1>Oi, Belinha 💜</h1>
+
+        <div class="mensagem" id="mensagem">
+            Fiz uma coisinha para você...
+        </div>
+
+        <button id="botao">
+            Clique aqui ✨
+        </button>
+
+        <div class="assinatura" id="assinatura">
+            Com carinho, Lu 💜
+        </div>
+
+        <div class="contador" id="contador">
+            0 / 6
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const mensagens = [
+
+            "Eu queria te lembrar de uma coisa...",
+
+            "Você é uma pessoa muito especial para mim. 💙",
+
+            "E talvez eu não fale isso tanto quanto deveria...",
+
+            "Mas eu gosto muito de ter você por perto. ✨",
+
+            "Espero que você nunca esqueça o quanto é querida. 💜",
+
+            "E que esse pequeno cantinho te faça sorrir nem que seja um pouquinho. 🌙"
+
+        ];
+
+
+        let indice = 0;
+
+
+        const mensagem = document.getElementById("mensagem");
+
+        const botao = document.getElementById("botao");
+
+        const contador = document.getElementById("contador");
+
+        const assinatura = document.getElementById("assinatura");
+
+
+        botao.addEventListener("click", function () {
+
+            if (indice < mensagens.length) {
+
+                mensagem.style.opacity = "0";
+
+                setTimeout(() => {
+
+                    mensagem.textContent = mensagens[indice];
+
+                    mensagem.style.opacity = "1";
+
+                }, 300);
+
+
+                indice++;
+
+                contador.textContent =
+                    indice + " / " + mensagens.length;
+
+
+                criarCoracoes();
+
+
+                if (indice === mensagens.length) {
+
+                    botao.textContent = "Mais um clique? 💜";
+
+                    assinatura.classList.add("mostrar");
+
+                }
+
+            }
+
+            else {
+
+                mensagem.textContent =
+                    "Obrigada por existir, Belinha. 💜";
+
+                criarCoracoes();
+
+            }
+
+        });
+
+
+        function criarCoracoes() {
+
+            for (let i = 0; i < 5; i++) {
+
+                const coracao =
+                    document.createElement("div");
+
+                coracao.classList.add("coracao");
+
+                coracao.textContent =
+                    Math.random() > 0.5 ? "💜" : "💙";
+
+
+                coracao.style.left =
+                    Math.random() * 100 + "vw";
+
+                coracao.style.top =
+                    Math.random() * 100 + "vh";
+
+
+                document.body.appendChild(coracao);
+
+
+                setTimeout(() => {
+
+                    coracao.remove();
+
+                }, 2000);
+
+            }
+
+        }
+
+
+        /*
+        Quando a Belinha clicar em qualquer lugar
+        da tela, aparece uma pequena reação.
+        */
+
+        document.body.addEventListener("click", function (evento) {
+
+            if (evento.target === botao) {
+                return;
+            }
+
+
+            const carinho =
+                document.createElement("div");
+
+
+            carinho.textContent =
+                Math.random() > 0.5 ? "💜" : "✨";
+
+
+            carinho.style.position = "absolute";
+
+            carinho.style.left =
+                evento.clientX + "px";
+
+            carinho.style.top =
+                evento.clientY + "px";
+
+            carinho.style.fontSize = "24px";
+
+            carinho.style.pointerEvents = "none";
+
+            carinho.style.animation =
+                "subir 1.5s ease-out forwards";
+
+
+            document.body.appendChild(carinho);
+
+
+            setTimeout(() => {
+
+                carinho.remove();
+
+            }, 1500);
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
